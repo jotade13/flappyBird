@@ -1,25 +1,24 @@
 #include <iostream>
 #include <stdlib.h>
+#include <windows.h>
 #include "Mapa.h"
+#include "Pajaro.h"
+
 
 
 using namespace std;
 
 void menu();
 void textoOpciones();
+void configuraciones();
+
 
 int main(){
-	system("mode con cols=128 lines=32");
-	cout<<"\t      \n";
-	cout<<"\t       (??\n";
-	cout<<"\t    (cc.c***\n";
-	cout<<"\t  (c.cccc****>\n";
-	cout<<"\t   (cc.cc.cc/\n";
-	cout<<"\t       ^^^";		
-	cout<<"\n\n\n\n\n";
+	configuraciones();
 			
-	//menu();
+	menu();
 }
+
 
 void menu()
 {
@@ -32,8 +31,9 @@ void menu()
 	
 	if(opcion==1)
 	{
-		Mapa mapa;
+		Mapa mapa();
 		mapa.dibujarTodo();
+		system("pause");
 	}else
 	{
 		exit(0);
@@ -42,13 +42,29 @@ void menu()
 void textoOpciones()
 {
 	system("cls");
-		cout<<"*********************************************************\n";
-		cout<<"*******************Menu Principal************************\n";
-		cout<<"***\t\t\t\t\t\t      ***\n";			
-		cout<<"**		1. Jugar\t\t\t       **\n";
-		cout<<"**		2. Salir\t\t\t       **\n";
-		cout<<"***\t\t\t\t\t\t      ***\n";
-		cout<<"*********************************************************\n";
-		cout<<"*********************************************************\n";
-		cout<<"Seleccione la opcion y pulse enter:  ";
+	cout<<"*********************************************************\n";
+	cout<<"*******************Menu Principal************************\n";
+	cout<<"***\t\t\t\t\t\t      ***\n";			
+	cout<<"**		1. Jugar\t\t\t       **\n";
+	cout<<"**		2. Salir\t\t\t       **\n";
+	cout<<"***\t\t\t\t\t\t      ***\n";
+	cout<<"*********************************************************\n";
+	cout<<"*********************************************************\n";
+	cout<<"Seleccione la opcion y pulse enter:  ";
+}
+void configuraciones()
+{
+	SMALL_RECT rect;
+	COORD coord;
+  	coord.X = 128; // Definiendo X y
+  	coord.Y = 34;  // Y para el tamaño del búfer.
+
+  	rect.Top = 0;
+  	rect.Left = 0;
+  	rect.Bottom = coord.Y-1; // Altura para ventana
+  	rect.Right = coord.X-1;  // Ancho para ventana
+
+  	HANDLE hwnd = GetStdHandle(STD_OUTPUT_HANDLE);
+  	SetConsoleScreenBufferSize(hwnd, coord);       // Establece tamaño del búfer
+  	SetConsoleWindowInfo(hwnd, TRUE, &rect); 
 }
