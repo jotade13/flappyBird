@@ -8,9 +8,11 @@ class Pajaro
 		~Pajaro();
 		int getCoordenadasX();
 		int getCoordenadasY();
-		void setCoordenadasy(int);
+		void setCoordenadasY(int);
 		int getAlto();
 		int getAncho();
+		void volar();
+		void caer();
 		
 		
 	private:

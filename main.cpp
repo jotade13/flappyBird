@@ -1,6 +1,8 @@
 #include <iostream>
 #include <stdlib.h>
 #include <windows.h>
+#include <Unistd.h>
+#include <conio.h>
 #include "Mapa.h"
 #include "Pajaro.h"
 
@@ -11,12 +13,16 @@ using namespace std;
 void menu();
 void textoOpciones();
 void configuraciones();
-
+void juego();
 
 int main(){
+	
 	configuraciones();
-			
-	menu();
+	while(true)
+	{
+		menu();
+	}
+	
 }
 
 
@@ -29,11 +35,11 @@ void menu()
 		cin>>opcion;
 	}while(opcion!=1&&opcion!=2);
 	
+	
 	if(opcion==1)
 	{
-		Mapa mapa();
-		mapa.dibujarTodo();
-		system("pause");
+		juego();
+		
 	}else
 	{
 		exit(0);
@@ -67,4 +73,22 @@ void configuraciones()
   	HANDLE hwnd = GetStdHandle(STD_OUTPUT_HANDLE);
   	SetConsoleScreenBufferSize(hwnd, coord);       // Establece tamaño del búfer
   	SetConsoleWindowInfo(hwnd, TRUE, &rect); 
+}
+void juego()
+{
+	Mapa mapa;
+	while(!mapa.getTerminado())
+	{
+		mapa.dibujarTodo(0);
+			
+		if(_kbhit())
+		{
+			if(_getch()==32)
+			{
+				mapa.dibujarTodo(1);
+			}
+		}
+		Sleep(100);
+	}
+		mapa.~Mapa();
 }

@@ -1,14 +1,14 @@
 #include "Mapa.h"
 #include <iostream>
 #include <stdlib.h>
+#include <Unistd.h>
 #include "Pajaro.h"
+#include "conio.h"
+
 using namespace std;
 
+
 Mapa::Mapa()
-{
-	
-}
-Mapa::Mapa(Pajaro pajaro)
 {
 	filTotal = 32;
 	colTotal = 128;
@@ -16,34 +16,57 @@ Mapa::Mapa(Pajaro pajaro)
 	{
 		for(int j=0;j<colTotal;j++)
 		{
-			if(i==0||i==1||i==31||i==30)
+			if(i==31)
 			{
-				matriz[i][j]='_';
+				matriz[i][j]='*';
 			}else
 			{
 				matriz[i][j]='0';
 			}	
 		}	
 	}
-	matPajaro="00000(??0000","00(cc.c***00","(c.cccc****>","0(cc.cc.cc/0","00000^^^0000";
+	terminado = false;
 }
 void Mapa::dibujarPajaro(int coordenadasX,int coordenadasY)
 {
-	for(int i=0;i<pajaro.getAlto();i++)
+	for(int i=coordenadasY;i<coordenadasY+pajaro.getAlto();i++)
 	{
-		for(int j=0;j<pajaro.getAncho();j++)
+		for(int j=coordenadasX;j<coordenadasX+pajaro.getAncho();j++)
 		{
-			
+			if(matriz[i][j]=='0')
+			{
+				matriz[i][j]=matPajaro[i-coordenadasY][j-coordenadasX];
+			}else
+			{
+				terminado = true;
+				return;
+			}
 		}
-	}
-		
+	}	
+}
+void Mapa::borrarPajaro(int coordenadasX,int coordenadasY)
+{
+	for(int i=coordenadasY;i<coordenadasY+pajaro.getAlto();i++)
+	{
+		for(int j=coordenadasX;j<coordenadasX+pajaro.getAncho();j++)
+		{
+			matriz[i][j]='0';
+		}
+	}	
 }
 
-void Mapa::dibujarTodo()
+void Mapa::dibujarTodo(int n)
 {
 	system("cls");
-	system("pause");
-	system("cls");
+	borrarPajaro(pajaro.getCoordenadasX(),pajaro.getCoordenadasY());
+	if(n==1)
+	{
+		pajaro.volar();
+	}else
+	{
+		pajaro.caer();
+	}
+	dibujarPajaro(pajaro.getCoordenadasX(),pajaro.getCoordenadasY());
 	for(int i=0;i<filTotal;i++)
 	{
 		for(int j=0;j<colTotal;j++)
@@ -58,9 +81,16 @@ void Mapa::dibujarTodo()
 			}
 		}
 		cout<<endl;
-	} 
+	}
 }
-
+bool Mapa::getTerminado()
+{
+	return terminado;
+}
+void Mapa::dibujarTuberias()
+{
+	
+}
 Mapa::~Mapa()
 {
 }

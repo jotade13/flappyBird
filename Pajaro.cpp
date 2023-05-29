@@ -17,21 +17,33 @@ Pajaro::Pajaro()
 	cout<<"\n\n\n\n\n";
 	*/
 }
-Pajaro::getAlto()
+int Pajaro::getAlto()
 {
 	return alto;
 }
-Pajaro::getAncho()
+int Pajaro::getAncho()
 {
 	return ancho;
 }
-Pajaro::getCoordenadasX()
+int Pajaro::getCoordenadasX()
 {
 	return coordenadasX;
 }
-Pajaro::getCoordenadasY()
+int Pajaro::getCoordenadasY()
 {
 	return coordenadasY;
+}
+void Pajaro::setCoordenadasY(int y){
+	coordenadasY = y;
+}
+
+void Pajaro::volar()
+{
+	setCoordenadasY(getCoordenadasY()-3);
+}
+void Pajaro::caer()
+{
+	setCoordenadasY(getCoordenadasY()+ 1);
 }
 Pajaro::~Pajaro()
 {
