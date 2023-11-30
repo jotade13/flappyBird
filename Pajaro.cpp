@@ -1,5 +1,6 @@
 #include "Pajaro.h"
 
+
 Pajaro::Pajaro()
 {
 	coordenadasX = 25;
@@ -39,7 +40,7 @@ void Pajaro::setCoordenadasY(int y){
 
 void Pajaro::volar()
 {
-	setCoordenadasY(getCoordenadasY()-3);
+	setCoordenadasY(getCoordenadasY()-4);
 }
 void Pajaro::caer()
 {

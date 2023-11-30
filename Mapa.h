@@ -16,7 +16,7 @@ class Mapa
 		void borrarPajaro(int,int);
 		void pajaroCaer();
 		bool getTerminado();
-		void dibujarTuberias();
+		void dibujarTuberias(int,int);
 		
 	private:
 		int filTotal;

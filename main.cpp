@@ -5,7 +5,7 @@
 #include <conio.h>
 #include "Mapa.h"
 #include "Pajaro.h"
-
+#include "Tuberias.h"
 
 
 using namespace std;
@@ -77,10 +77,12 @@ void configuraciones()
 void juego()
 {
 	Mapa mapa;
+	Tuberias tuberias[100];
+	int contTub=7;
 	while(!mapa.getTerminado())
 	{
-		mapa.dibujarTodo(0);
-			
+		contTub++;
+		mapa.dibujarTodo(0);	
 		if(_kbhit())
 		{
 			if(_getch()==32)
@@ -89,6 +91,10 @@ void juego()
 			}
 		}
 		Sleep(100);
+		if(contTub=8)
+		{
+			
+		}	
 	}
 		mapa.~Mapa();
 }

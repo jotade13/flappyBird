@@ -87,9 +87,16 @@ bool Mapa::getTerminado()
 {
 	return terminado;
 }
-void Mapa::dibujarTuberias()
+void Mapa::dibujarTuberias(int arriba,int abajo)
 {
-	
+	for(int i=0;i<arriba;i++)
+	{
+		matriz[i][128]=='*';
+	}
+	for(int i=abajo;i<filTotal;i++)
+	{
+		matriz[i][128]=='*';
+	}
 }
 Mapa::~Mapa()
 {
