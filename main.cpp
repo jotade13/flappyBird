@@ -77,8 +77,8 @@ void configuraciones()
 void juego()
 {
 	Mapa mapa;
-	Tuberias tuberias[100];
-	int contTub=7;
+	int contTub=29;
+	int tub=0;
 	while(!mapa.getTerminado())
 	{
 		contTub++;
@@ -91,9 +91,9 @@ void juego()
 			}
 		}
 		Sleep(100);
-		if(contTub=8)
+		if(contTub==30)
 		{
-			
+			mapa.activarTuberia();
 		}	
 	}
 		mapa.~Mapa();

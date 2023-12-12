@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <Unistd.h>
 #include "Pajaro.h"
+#include "Tuberias.h"
 #include "conio.h"
 
 using namespace std;
@@ -10,6 +11,7 @@ using namespace std;
 
 Mapa::Mapa()
 {
+	nroTub = 0;
 	filTotal = 32;
 	colTotal = 128;
 	for(int i=0;i<filTotal;i++)
@@ -33,13 +35,17 @@ void Mapa::dibujarPajaro(int coordenadasX,int coordenadasY)
 	{
 		for(int j=coordenadasX;j<coordenadasX+pajaro.getAncho();j++)
 		{
-			if(matriz[i][j]=='0')
+			if(i>=0)
 			{
-				matriz[i][j]=matPajaro[i-coordenadasY][j-coordenadasX];
-			}else
-			{
-				terminado = true;
-				return;
+				if(matriz[i][j]=='0')
+				{
+					
+						matriz[i][j]=matPajaro[i-coordenadasY][j-coordenadasX];	
+				}else
+				{
+					terminado = true;
+					return;
+				}
 			}
 		}
 	}	
@@ -97,6 +103,10 @@ void Mapa::dibujarTuberias(int arriba,int abajo)
 	{
 		matriz[i][128]=='*';
 	}
+}
+void Mapa::activarTuberia()
+{
+	tuberias[nroTub].setActiva(true);
 }
 Mapa::~Mapa()
 {

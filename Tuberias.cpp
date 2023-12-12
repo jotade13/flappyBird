@@ -7,19 +7,40 @@ Tuberias::Tuberias()
 	int diferencia = 10; //espacio entre las tuberias
 	int numAleatorio = 3+rand()%(20-3);
 	arriba = numAleatorio;
-	abajo = numAleatorio + diferencia;	
+	abajo = numAleatorio + diferencia;
+	coordenadasX = 128;
+	activa= false;
 }
-Tuberias::getArriba()
+int Tuberias::getArriba()
 {
 	return arriba;
 }
-Tuberias::getAbajo()
+int Tuberias::getAbajo()
 {
 	return abajo;
 }
-Tuberias::getCoordenadasX()
+int Tuberias::getCoordenadasX()
 {
 	return coordenadasX;
+}
+int Tuberias::getAncho()
+{
+	return ancho;
+}
+void Tuberias::avanzar()
+{
+	if(activa)
+	{
+		coordenadasX --;
+	}
+}
+bool Tuberias::getActiva()
+{
+	return activa;
+}
+void Tuberias::setActiva(bool act)
+{
+	activa=act;
 }
 Tuberias::~Tuberias()
 {

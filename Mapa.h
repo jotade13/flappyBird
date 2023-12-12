@@ -1,6 +1,7 @@
 #ifndef MAPA_H
 #define MAPA_H
 #include "Pajaro.h"
+#include "Tuberias.h"
 
 
 
@@ -9,7 +10,6 @@ class Mapa
 {
 	public:
 		Mapa();
-		Mapa(Pajaro);
 		~Mapa();
 		void dibujarTodo(int);
 		void dibujarPajaro(int,int);
@@ -17,6 +17,8 @@ class Mapa
 		void pajaroCaer();
 		bool getTerminado();
 		void dibujarTuberias(int,int);
+		void activarTuberia();
+		int getNroTub();
 		
 	private:
 		int filTotal;
@@ -30,6 +32,8 @@ class Mapa
 								{'0','0','0','0','0','^','^','^','0','0','0','0'}
 								};
 		bool terminado;
+		Tuberias tuberias[100];
+		int nroTub;		
 		//matPajaro= {"00000(??0000","00(cc.c***00","(c.cccc****>","0(cc.cc.cc/0","00000^^^0000"};
 };
 

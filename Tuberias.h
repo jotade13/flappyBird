@@ -9,10 +9,19 @@ class Tuberias
 		int getArriba();
 		int getAbajo();
 		int getCoordenadasX();
+		int getAncho();
+		int getAlto();
+		void avanzar();
+		bool getActiva();
+		void setActiva(bool);
+	
 	private:
 		int arriba;
 		int abajo;
 		int coordenadasX;	
+		int ancho;
+		int alto;
+		bool activa;
 };
 
 #endif
