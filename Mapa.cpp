@@ -93,20 +93,26 @@ bool Mapa::getTerminado()
 {
 	return terminado;
 }
-void Mapa::dibujarTuberias(int arriba,int abajo)
+void Mapa::dibujarTuberias()
 {
-	for(int i=0;i<arriba;i++)
+	for(int k=0;k<nroTubCiclo;k++)
 	{
-		matriz[i][128]=='*';
-	}
-	for(int i=abajo;i<filTotal;i++)
-	{
-		matriz[i][128]=='*';
-	}
+		if(tuberias[k].getActiva())
+		{
+			for(int i=0;i<tuberias[k].getArriba();i++)
+			{
+				matriz[i][tuberias[k].getCoordenadasX()]=='*';
+			}
+			for(int i=tuberias[k].getAbajo();i<filTotal;i++)
+			{
+				matriz[i][tuberias[k].getCoordenadasX()]=='*';
+			}
+		}		
+	}	
 }
-void Mapa::activarTuberia()
+void Mapa::activarTuberia(int nro)
 {
-	tuberias[nroTub].setActiva(true);
+	tuberias[nro].setActiva(true);
 }
 Mapa::~Mapa()
 {

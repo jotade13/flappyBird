@@ -93,7 +93,9 @@ void juego()
 		Sleep(100);
 		if(contTub==30)
 		{
-			mapa.activarTuberia();
+			mapa.activarTuberia(tub);
+			tub++;
+			contTub=0;
 		}	
 	}
 		mapa.~Mapa();

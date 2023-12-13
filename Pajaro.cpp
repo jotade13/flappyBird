@@ -7,8 +7,6 @@ Pajaro::Pajaro()
 	coordenadasY = 12;
 	alto=5;
 	ancho=12;
-	
-	
 	/*
 	cout<<"\t       (??\n";
 	cout<<"\t    (cc.c***\n";

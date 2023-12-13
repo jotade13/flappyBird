@@ -2,7 +2,7 @@
 #define MAPA_H
 #include "Pajaro.h"
 #include "Tuberias.h"
-
+#define nroTubCiclo 5
 
 
 
@@ -16,8 +16,8 @@ class Mapa
 		void borrarPajaro(int,int);
 		void pajaroCaer();
 		bool getTerminado();
-		void dibujarTuberias(int,int);
-		void activarTuberia();
+		void dibujarTuberias();
+		void activarTuberia(int);
 		int getNroTub();
 		
 	private:
@@ -30,9 +30,9 @@ class Mapa
 								{'(','c','.','c','c','c','c','*','*','*','*','>'},
 								{'0','(','c','c','.','c','c','.','c','c','/','0'},
 								{'0','0','0','0','0','^','^','^','0','0','0','0'}
-								};
+								};					
 		bool terminado;
-		Tuberias tuberias[100];
+		Tuberias tuberias[nroTubCiclo];
 		int nroTub;		
 		//matPajaro= {"00000(??0000","00(cc.c***00","(c.cccc****>","0(cc.cc.cc/0","00000^^^0000"};
 };
