@@ -18,13 +18,7 @@ Mapa::Mapa()
 	{
 		for(int j=0;j<colTotal;j++)
 		{
-			if(i==31)
-			{
-				matriz[i][j]='*';
-			}else
-			{
-				matriz[i][j]='0';
-			}	
+				matriz[i][j]='0';	
 		}	
 	}
 	terminado = false;
@@ -65,6 +59,7 @@ void Mapa::dibujarTodo(int n)
 {
 	system("cls");
 	borrarPajaro(pajaro.getCoordenadasX(),pajaro.getCoordenadasY());
+	borrarTuberias();
 	if(n==1)
 	{
 		pajaro.volar();
@@ -72,7 +67,12 @@ void Mapa::dibujarTodo(int n)
 	{
 		pajaro.caer();
 	}
+	for(int i=0;i<nroTubCiclo;i++)
+	{
+		tuberias[i].avanzar();
+	}
 	dibujarPajaro(pajaro.getCoordenadasX(),pajaro.getCoordenadasY());
+	dibujarTuberias();
 	for(int i=0;i<filTotal;i++)
 	{
 		for(int j=0;j<colTotal;j++)
@@ -88,6 +88,10 @@ void Mapa::dibujarTodo(int n)
 		}
 		cout<<endl;
 	}
+	for(int j=0;j<colTotal;j++)
+	{
+		cout<<"*";
+	}
 }
 bool Mapa::getTerminado()
 {
@@ -101,15 +105,32 @@ void Mapa::dibujarTuberias()
 		{
 			for(int i=0;i<tuberias[k].getArriba();i++)
 			{
-				matriz[i][tuberias[k].getCoordenadasX()]=='*';
+				matriz[i][tuberias[k].getCoordenadasX()]='*';	
 			}
 			for(int i=tuberias[k].getAbajo();i<filTotal;i++)
 			{
-				matriz[i][tuberias[k].getCoordenadasX()]=='*';
+				matriz[i][tuberias[k].getCoordenadasX()]='*';
 			}
 		}		
-	}	
+	}
 }
+void Mapa::borrarTuberias()
+{
+	for(int k=0;k<nroTubCiclo;k++)
+	{
+		if(tuberias[k].getActiva())
+		{
+			for(int i=0;i<tuberias[k].getArriba();i++)
+			{
+				matriz[i][tuberias[k].getCoordenadasX()]='0';
+			}
+			for(int i=tuberias[k].getAbajo();i<filTotal;i++)
+			{
+				matriz[i][tuberias[k].getCoordenadasX()]='0';
+			}
+		}		
+	}
+} 
 void Mapa::activarTuberia(int nro)
 {
 	tuberias[nro].setActiva(true);

@@ -17,6 +17,7 @@ class Mapa
 		void pajaroCaer();
 		bool getTerminado();
 		void dibujarTuberias();
+		void borrarTuberias();
 		void activarTuberia(int);
 		int getNroTub();
 		
@@ -33,7 +34,7 @@ class Mapa
 								};					
 		bool terminado;
 		Tuberias tuberias[nroTubCiclo];
-		int nroTub;		
+		int nroTub;	
 		//matPajaro= {"00000(??0000","00(cc.c***00","(c.cccc****>","0(cc.cc.cc/0","00000^^^0000"};
 };
 

@@ -8,7 +8,7 @@ Tuberias::Tuberias()
 	int numAleatorio = 3+rand()%(20-3);
 	arriba = numAleatorio;
 	abajo = numAleatorio + diferencia;
-	coordenadasX = 128;
+	coordenadasX = 127;
 	activa= false;
 }
 int Tuberias::getArriba()

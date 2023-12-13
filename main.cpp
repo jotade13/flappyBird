@@ -82,7 +82,7 @@ void juego()
 	while(!mapa.getTerminado())
 	{
 		contTub++;
-		mapa.dibujarTodo(0);	
+		mapa.dibujarTodo(0);
 		if(_kbhit())
 		{
 			if(_getch()==32)
@@ -96,7 +96,7 @@ void juego()
 			mapa.activarTuberia(tub);
 			tub++;
 			contTub=0;
-		}	
+		}
 	}
 		mapa.~Mapa();
 }
