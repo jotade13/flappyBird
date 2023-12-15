@@ -59,7 +59,7 @@ void Mapa::dibujarTodo(int n)
 {
 	system("cls");
 	borrarPajaro(pajaro.getCoordenadasX(),pajaro.getCoordenadasY());
-	borrarTuberias();
+	des_HacerTuberias(false);
 	if(n==1)
 	{
 		pajaro.volar();
@@ -72,7 +72,7 @@ void Mapa::dibujarTodo(int n)
 		tuberias[i].avanzar();
 	}
 	dibujarPajaro(pajaro.getCoordenadasX(),pajaro.getCoordenadasY());
-	dibujarTuberias();
+	des_HacerTuberias(true);
 	for(int i=0;i<filTotal;i++)
 	{
 		for(int j=0;j<colTotal;j++)
@@ -97,7 +97,7 @@ bool Mapa::getTerminado()
 {
 	return terminado;
 }
-void Mapa::dibujarTuberias()
+void Mapa::des_HacerTuberias(bool accion) //metodo que dibuja o borra las tuberias depende de la accion en el parametro
 {
 	for(int k=0;k<nroTubCiclo;k++)
 	{
@@ -105,32 +105,29 @@ void Mapa::dibujarTuberias()
 		{
 			for(int i=0;i<tuberias[k].getArriba();i++)
 			{
-				matriz[i][tuberias[k].getCoordenadasX()]='*';	
+				if(accion)
+				{
+					matriz[i][tuberias[k].getCoordenadasX()]='*'; //pinta tuberias
+				}else
+				{
+					matriz[i][tuberias[k].getCoordenadasX()]='0'; //borra tuberias 
+				}
+					
 			}
 			for(int i=tuberias[k].getAbajo();i<filTotal;i++)
 			{
-				matriz[i][tuberias[k].getCoordenadasX()]='*';
+				if(accion)
+				{
+					matriz[i][tuberias[k].getCoordenadasX()]='*'; //pinta tuberias
+				}else
+				{
+					matriz[i][tuberias[k].getCoordenadasX()]='0'; //borra tuberias 
+				}
 			}
 		}		
 	}
 }
-void Mapa::borrarTuberias()
-{
-	for(int k=0;k<nroTubCiclo;k++)
-	{
-		if(tuberias[k].getActiva())
-		{
-			for(int i=0;i<tuberias[k].getArriba();i++)
-			{
-				matriz[i][tuberias[k].getCoordenadasX()]='0';
-			}
-			for(int i=tuberias[k].getAbajo();i<filTotal;i++)
-			{
-				matriz[i][tuberias[k].getCoordenadasX()]='0';
-			}
-		}		
-	}
-} 
+ 
 void Mapa::activarTuberia(int nro)
 {
 	tuberias[nro].setActiva(true);

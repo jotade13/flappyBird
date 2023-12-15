@@ -16,8 +16,7 @@ class Mapa
 		void borrarPajaro(int,int);
 		void pajaroCaer();
 		bool getTerminado();
-		void dibujarTuberias();
-		void borrarTuberias();
+		void des_HacerTuberias(bool);
 		void activarTuberia(int);
 		int getNroTub();
 		
