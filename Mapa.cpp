@@ -23,43 +23,38 @@ Mapa::Mapa()
 	}
 	terminado = false;
 }
-void Mapa::dibujarPajaro(int coordenadasX,int coordenadasY)
+void Mapa::dibujarOBorrarPajaro(bool accion) //accion true dibuja de lo contrario borra
 {
-	for(int i=coordenadasY;i<coordenadasY+pajaro.getAlto();i++)
+	for(int i=pajaro.getCoordenadasY();i<pajaro.getCoordenadasY()+pajaro.getAlto();i++)
 	{
-		for(int j=coordenadasX;j<coordenadasX+pajaro.getAncho();j++)
+		for(int j=pajaro.getCoordenadasX();j<pajaro.getCoordenadasX()+pajaro.getAncho();j++)
 		{
-			if(i>=0)
+			if(accion)
 			{
-				if(matriz[i][j]=='0')
+				if(i>=0)
 				{
-					
-						matriz[i][j]=matPajaro[i-coordenadasY][j-coordenadasX];	
-				}else
-				{
-					terminado = true;
-					return;
+					if(matriz[i][j]=='0')
+					{
+						
+							matriz[i][j]=matPajaro[i-pajaro.getCoordenadasY()][j-pajaro.getCoordenadasX()];	
+					}else
+					{
+						terminado = true;
+						return;
+					}
 				}
-			}
+			}else
+			{
+				matriz[i][j]='0';
+			}	
 		}
 	}	
 }
-void Mapa::borrarPajaro(int coordenadasX,int coordenadasY)
-{
-	for(int i=coordenadasY;i<coordenadasY+pajaro.getAlto();i++)
-	{
-		for(int j=coordenadasX;j<coordenadasX+pajaro.getAncho();j++)
-		{
-			matriz[i][j]='0';
-		}
-	}	
-}
-
 void Mapa::dibujarTodo(int n)
 {
 	system("cls");
-	borrarPajaro(pajaro.getCoordenadasX(),pajaro.getCoordenadasY());
-	des_HacerTuberias(false);
+	dibujarOBorrarPajaro(false);
+	dibujarOBorrarTuberias(false);
 	if(n==1)
 	{
 		pajaro.volar();
@@ -71,8 +66,59 @@ void Mapa::dibujarTodo(int n)
 	{
 		tuberias[i].avanzar();
 	}
-	dibujarPajaro(pajaro.getCoordenadasX(),pajaro.getCoordenadasY());
-	des_HacerTuberias(true);
+	dibujarOBorrarPajaro(true);
+	dibujarOBorrarTuberias(true);
+	dibujarMapa();
+	dibujarSuelo();
+}
+bool Mapa::getTerminado()
+{
+	return terminado;
+}
+void Mapa::dibujarOBorrarTuberias(bool accion) //metodo que dibuja o borra las tuberias depende de la accion en el parametro
+{
+	for(int k=0;k<nroTubCiclo;k++)
+	{
+		if(tuberias[k].getActiva())
+		{
+			for(int i=0;i<tuberias[k].getArriba();i++) //tuberias superiores
+			{
+				if(accion)
+				{
+					matriz[i][tuberias[k].getCoordenadasX()]='*'; //pinta tuberias
+				}else
+				{
+					matriz[i][tuberias[k].getCoordenadasX()]='0'; //borra tuberias 
+				}
+					
+			}
+			for(int i=tuberias[k].getAbajo();i<filTotal;i++) //tuberias inferiores
+			{
+				if(accion)
+				{
+					matriz[i][tuberias[k].getCoordenadasX()]='*'; //pinta 
+				}else
+				{
+					matriz[i][tuberias[k].getCoordenadasX()]='0'; //borra
+				}
+			}
+		}		
+	}
+}
+ 
+void Mapa::activarTuberia(int nro)
+{
+	tuberias[nro].setActiva(true);
+}
+void Mapa::dibujarSuelo()
+{
+	for(int j=0;j<colTotal;j++)
+	{
+		cout<<"*";
+	}
+}
+void Mapa::dibujarMapa()
+{
 	for(int i=0;i<filTotal;i++)
 	{
 		for(int j=0;j<colTotal;j++)
@@ -88,49 +134,6 @@ void Mapa::dibujarTodo(int n)
 		}
 		cout<<endl;
 	}
-	for(int j=0;j<colTotal;j++)
-	{
-		cout<<"*";
-	}
-}
-bool Mapa::getTerminado()
-{
-	return terminado;
-}
-void Mapa::des_HacerTuberias(bool accion) //metodo que dibuja o borra las tuberias depende de la accion en el parametro
-{
-	for(int k=0;k<nroTubCiclo;k++)
-	{
-		if(tuberias[k].getActiva())
-		{
-			for(int i=0;i<tuberias[k].getArriba();i++)
-			{
-				if(accion)
-				{
-					matriz[i][tuberias[k].getCoordenadasX()]='*'; //pinta tuberias
-				}else
-				{
-					matriz[i][tuberias[k].getCoordenadasX()]='0'; //borra tuberias 
-				}
-					
-			}
-			for(int i=tuberias[k].getAbajo();i<filTotal;i++)
-			{
-				if(accion)
-				{
-					matriz[i][tuberias[k].getCoordenadasX()]='*'; //pinta tuberias
-				}else
-				{
-					matriz[i][tuberias[k].getCoordenadasX()]='0'; //borra tuberias 
-				}
-			}
-		}		
-	}
-}
- 
-void Mapa::activarTuberia(int nro)
-{
-	tuberias[nro].setActiva(true);
 }
 Mapa::~Mapa()
 {

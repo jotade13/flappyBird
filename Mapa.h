@@ -12,13 +12,12 @@ class Mapa
 		Mapa();
 		~Mapa();
 		void dibujarTodo(int);
-		void dibujarPajaro(int,int);
-		void borrarPajaro(int,int);
-		void pajaroCaer();
+		void dibujarOBorrarPajaro(bool);
 		bool getTerminado();
-		void des_HacerTuberias(bool);
+		void dibujarOBorrarTuberias(bool);
 		void activarTuberia(int);
-		int getNroTub();
+		void dibujarSuelo();
+		void dibujarMapa();
 		
 	private:
 		int filTotal;
